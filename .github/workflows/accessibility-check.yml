@@ -1,0 +1,45 @@
+name: Teste de Acessibilidade Automatizado
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./testes-acessibilidade
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint Check
+        run: npm run lint
+
+      - name: Run Accessibility Tests on Chrome
+        run: |
+          npm run start:app &
+          sleep 5 
+          npm run cy:run -- --browser chrome
+
+      - name: Upload Accessibility Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-de-acessibilidade-chrome
+          path: testes-acessibilidade/cypress/reports

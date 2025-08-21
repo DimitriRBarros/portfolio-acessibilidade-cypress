@@ -1,0 +1,9 @@
+# Node
+node_modules/
+npm-debug.log
+
+# Cypress
+testes-acessibilidade/cypress/videos/
+testes-acessibilidade/cypress/screenshots/
+testes-acessibilidade/cypress.env.json
+testes-acessibilidade/cypress/reports/

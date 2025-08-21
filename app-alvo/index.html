@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login para Teste</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; }
+        .login-card { padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+        input { display: block; width: 250px; padding: 10px; margin: 10px auto; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #007bff; color: #ffffff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        #terms-modal { padding: 2rem; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        #terms-modal::backdrop { background-color: rgba(0,0,0,0.4); }
+        .close { color: #666; float: right; font-size: 28px; font-weight: bold; cursor: pointer; background: none; border: none; padding: 0; line-height: 1; }
+        .modal-actions { margin-top: 1rem; display: flex; justify-content: flex-end; gap: 10px; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="login-card">
+            <img src="https://placehold.co/100x40?text=Logo" alt="Logo da empresa de exemplo" />
+            <h1 class="sr-only">Página de Login</h1>
+            <form id="login-form">
+                <label for="email-input" class="sr-only">Endereço de e-mail</label>
+                <input id="email-input" type="email" placeholder="Digite seu e-mail">
+                <label for="password-input" class="sr-only">Senha</label>
+                <input id="password-input" type="password" placeholder="Sua senha">
+                <button type="submit">Entrar</button>
+            </form>
+            <button id="open-modal-btn">Termos de Serviço</button>
+        </div>
+    </main>
+    <dialog id="terms-modal">
+        <button id="close-btn" class="close" aria-label="Fechar">&times;</button>
+        <h2>Nossos Termos de Serviço</h2>
+        <p>Aqui você leria um texto muito longo sobre termos de serviço...</p>
+        <div class="modal-actions">
+            <button id="ok-btn">OK</button>
+        </div>
+    </dialog>
+    <script>
+        const openBtn = document.getElementById('open-modal-btn');
+        const dialog = document.getElementById('terms-modal');
+        const closeBtn = document.getElementById('close-btn');
+        const okBtn = document.getElementById('ok-btn');
+        openBtn.addEventListener('click', () => { dialog.showModal(); });
+        closeBtn.addEventListener('click', () => { dialog.close(); });
+        okBtn.addEventListener('click', () => { dialog.close(); });
+        dialog.addEventListener('keydown', (event) => {
+            if (event.key === 'Tab') {
+                const focusableElements = dialog.querySelectorAll('button');
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+                if (event.shiftKey) { 
+                    if (document.activeElement === firstElement) {
+                        event.preventDefault();
+                        lastElement.focus();
+                    }
+                } else { 
+                    if (document.activeElement === lastElement) {
+                        event.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
