@@ -14,8 +14,6 @@ O branch `main` deste repositório está configurado para passar em todos os tes
 
 Para provar a eficácia deste pipeline, criei um Pull Request que introduz intencionalmente uma série de falhas de acessibilidade. O workflow do GitHub Actions foi acionado automaticamente, detectou as violações e bloqueou o merge.
 
-➡️ **[Clique aqui para ver o Pull Request de demonstração com a falha sendo bloqueada (❌)](COLE A URL DO SEU PULL REQUEST AQUI)**
-
 ## 🚀 Valor Agregado
 
 Este projeto estabelece um pipeline de qualidade que oferece:
