@@ -1,6 +1,5 @@
 import 'cypress-axe';
 import 'cypress-plugin-tab';
-import 'cypress-mochawesome-reporter/register';
 
 const { defineConfig } = require('cypress')
 

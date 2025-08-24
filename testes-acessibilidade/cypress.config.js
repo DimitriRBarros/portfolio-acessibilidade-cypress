@@ -14,6 +14,7 @@ module.exports = defineConfig({
     experimentalRunAllSpecs: true,
     setupNodeEvents(on) {
       require('cypress-mochawesome-reporter/plugin')(on);
+      require('cypress-mochawesome-reporter/plugin')(on);
     },
   },
 });
